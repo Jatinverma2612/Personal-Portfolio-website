@@ -7,7 +7,6 @@ export default function About() {
   return (
     <section id="about" className="py-24 px-6 scroll-mt-28">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
         {/* LEFT CONTENT */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -30,21 +29,21 @@ export default function About() {
             </span>
             . I enjoy transforming ideas into real-world applications using
             modern frontend technologies like{" "}
-            <span className="text-white font-medium">React</span> and
-            Tailwind CSS.
+            <span className="text-white font-medium">React</span> and Tailwind
+            CSS.
           </p>
 
           <p className="text-zinc-400 leading-relaxed mb-6">
             Alongside frontend development, I am actively working towards
             becoming a{" "}
-            <span className="text-white font-medium">
-              Full Stack Developer
-            </span>
+            <span className="text-white font-medium">Full Stack Developer</span>
             . I regularly practice{" "}
-            <span className="text-orange-500">Data Structures & Algorithms</span>{" "}
+            <span className="text-orange-500">
+              Data Structures & Algorithms
+            </span>{" "}
             using <span className="text-white font-medium">C and C++</span> to
-            strengthen my problem-solving mindset and logical thinking.
-            I have solved{" "}
+            strengthen my problem-solving mindset and logical thinking. I have
+            solved{" "}
             <span className="text-white font-medium">
               100+ LeetCode problems
             </span>
@@ -61,17 +60,18 @@ export default function About() {
           </p>
 
           <a
-            href="/resume.pdf"
+            href="/jatinverma_resume.pdf"
             target="_blank"
+            rel="noopener noreferrer"
             className="
-              inline-block
-              px-7 py-3
-              bg-orange-500 text-white text-sm
-              rounded-3xl
-              transition-all duration-300
-              hover:bg-orange-400
-              hover:shadow-[0_0_30px_rgba(255,138,0,0.45)]
-            "
+    inline-block
+    px-7 py-3
+    bg-orange-500 text-white text-sm
+    rounded-3xl
+    transition-all duration-300
+    hover:bg-orange-400
+    hover:shadow-[0_0_30px_rgba(255,138,0,0.45)]
+  "
           >
             Download Resume
           </a>
@@ -79,7 +79,6 @@ export default function About() {
 
         {/* RIGHT STATS */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-
           {/* PROJECTS */}
           <motion.div
             whileHover={{ y: -8 }}
@@ -108,14 +107,9 @@ export default function About() {
             className="glass-card p-6 text-center transition"
           >
             <Music className="mx-auto mb-4 text-orange-500" size={26} />
-            <h3 className="text-xl font-semibold text-white">
-              Guitarist
-            </h3>
-            <p className="text-zinc-400 text-sm mt-1">
-              Passionate About Music
-            </p>
+            <h3 className="text-xl font-semibold text-white">Guitarist</h3>
+            <p className="text-zinc-400 text-sm mt-1">Passionate About Music</p>
           </motion.div>
-
         </div>
       </div>
     </section>

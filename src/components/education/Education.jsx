@@ -61,7 +61,7 @@ export default function Education() {
             </p>
 
             <p className="text-zinc-500 text-xs mt-4">
-              College: Khalsa College, Delhi
+              College: Sri Guru Tegh Bahadur Khalsa College, Delhi
             </p>
           </motion.div>
 

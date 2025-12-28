@@ -6,34 +6,46 @@ import { ChevronLeft, ChevronRight, ExternalLink, Github } from "lucide-react";
 
 const projects = [
   {
-    title: "Weather App",
-    desc: "Real-time weather application using API.",
-    image: "/projects/calender.png",
-    tech: ["React", "API"],
+    id: 1,
+    title: "Weather Dashboard",
+    description:
+      "A production-ready weather dashboard providing real-time weather data, 5-day forecasts, charts, and theme/unit toggles.",
+    image: "/projects/weather.png",
+    tech: [
+      "React",
+      "Tailwind CSS",
+      "Context API",
+      "OpenWeather API",
+      "Recharts",
+    ],
+    liveUrl: "https://weatherapp-psi-plum.vercel.app/",
+    codeUrl: "https://github.com/Jatinverma2612/Weather-App.git",
   },
   {
-    title: "Movie Search",
-    desc: "Search movies using OMDb API.",
-    image: "/projects/calender.png",
-    tech: ["React", "API"],
+    id: 2,
+    title: "Calendar Management App",
+    description:
+      "A feature-rich calendar application to create, edit, and manage events with persistent storage and clean UI.",
+    image: "/projects/calendar-app.png",
+    tech: ["React", "TypeScript", "Tailwind", "date-fns"],
+    liveUrl: "https://calendar-rho-blue.vercel.app/",
+    codeUrl: "https://github.com/Jatinverma2612/Calendar-project.git",
   },
   {
-    title: "Portfolio Website",
-    desc: "Modern animated personal portfolio.",
-    image: "/projects/calender.png",
-    tech: ["React", "Tailwind"],
-  },
-  {
-    title: "Task Manager",
-    desc: "Task management frontend app.",
-    image: "/projects/calender.png",
-    tech: ["React"],
-  },
-  {
-    title: "GitHub Finder",
-    desc: "Search GitHub profiles using API.",
-    image: "/projects/calender.png",
-    tech: ["React", "API"],
+    id: 3,
+    title: "Noted – Note Saver Web Application",
+    description:
+      "A responsive note-taking app with CRUD functionality, Redux state management, theme support, and persistent storage.",
+    image: "/projects/noted-app.png",
+    tech: [
+      "React",
+      "Redux Toolkit",
+      "Tailwind CSS",
+      "React Router",
+      "LocalStorage",
+    ],
+    liveUrl: "https://notes-saver-fawn.vercel.app/",
+    codeUrl: "https://github.com/Jatinverma2612/Note-Saver-App.git",
   },
 ];
 
@@ -41,7 +53,7 @@ export default function Projects() {
   const [index, setIndex] = useState(0);
 
   const CARD_WIDTH = 360;
-  const MAX_INDEX = projects.length - 3;
+  const MAX_INDEX = Math.max(projects.length - 3, 0);
 
   return (
     <section id="projects" className="py-28 overflow-hidden scroll-mt-28">
@@ -60,7 +72,7 @@ export default function Projects() {
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          transition={{ duration: 0.6, delay: 0.1 }}
           viewport={{ once: true }}
           className="text-zinc-400 text-center mt-4 mb-16"
         >
@@ -68,14 +80,8 @@ export default function Projects() {
         </motion.p>
 
         {/* SLIDER */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="relative"
-        >
-          {/* LEFT */}
+        <div className="relative">
+          {/* LEFT ARROW */}
           <button
             onClick={() => setIndex((i) => Math.max(i - 1, 0))}
             disabled={index === 0}
@@ -88,32 +94,34 @@ export default function Projects() {
             <motion.div
               className="flex gap-8"
               animate={{ x: -index * CARD_WIDTH }}
-              transition={{
-                type: "spring",
-                stiffness: 80,
-                damping: 18,
-              }}
+              transition={{ type: "spring", stiffness: 80, damping: 18 }}
             >
-              {projects.map((p) => (
+              {projects.map((project) => (
                 <div
-                  key={p.title}
+                  key={project.id}
                   className="min-w-[340px] glass-card overflow-hidden group"
                 >
-                  <div className="h-[190px] overflow-hidden">
+                  {/* IMAGE */}
+                  <div className="h-[190px] overflow-hidden bg-black/30">
                     <img
-                      src={p.image}
-                      alt={p.title}
+                      src={project.image}
+                      alt={project.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   </div>
 
+                  {/* CONTENT */}
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-3">{p.title}</h3>
+                    <h3 className="text-xl font-semibold mb-3">
+                      {project.title}
+                    </h3>
 
-                    <p className="text-zinc-400 text-sm mb-5">{p.desc}</p>
+                    <p className="text-zinc-400 text-sm mb-5">
+                      {project.description}
+                    </p>
 
                     <div className="flex flex-wrap gap-2 mb-6">
-                      {p.tech.map((t) => (
+                      {project.tech.map((t) => (
                         <span
                           key={t}
                           className="text-xs px-3 py-1 rounded-full bg-zinc-800 text-zinc-300"
@@ -124,12 +132,22 @@ export default function Projects() {
                     </div>
 
                     <div className="flex gap-5 text-sm">
-                      <span className="text-orange-500 flex items-center gap-1 hover:underline cursor-pointer">
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-orange-500 flex items-center gap-1 hover:underline"
+                      >
                         <ExternalLink size={16} /> Live
-                      </span>
-                      <span className="text-zinc-300 flex items-center gap-1 hover:text-orange-500 cursor-pointer">
+                      </a>
+                      <a
+                        href={project.codeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-zinc-300 flex items-center gap-1 hover:text-orange-500"
+                      >
                         <Github size={16} /> Code
-                      </span>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -137,7 +155,7 @@ export default function Projects() {
             </motion.div>
           </div>
 
-          {/* RIGHT */}
+          {/* RIGHT ARROW */}
           <button
             onClick={() => setIndex((i) => Math.min(i + 1, MAX_INDEX))}
             disabled={index === MAX_INDEX}
@@ -145,7 +163,7 @@ export default function Projects() {
           >
             <ChevronRight />
           </button>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
