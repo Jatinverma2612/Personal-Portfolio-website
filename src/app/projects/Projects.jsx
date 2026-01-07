@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ExternalLink, Github } from "lucide-react";
 
@@ -31,38 +31,58 @@ const projects = [
     liveUrl: "https://calendar-rho-blue.vercel.app/",
     codeUrl: "https://github.com/Jatinverma2612/Calendar-project.git",
   },
-  {
-    id: 3,
-    title: "Noted – Note Saver Web Application",
-    description:
-      "A responsive note-taking app with CRUD functionality, Redux state management, theme support, and persistent storage.",
-    image: "/projects/noted-app.png",
-    tech: [
-      "React",
-      "Redux Toolkit",
-      "Tailwind CSS",
-      "React Router",
-      "LocalStorage",
-    ],
-    liveUrl: "https://notes-saver-fawn.vercel.app/",
-    codeUrl: "https://github.com/Jatinverma2612/Note-Saver-App.git",
-  },
+  // {
+  //   id: 3,
+  //   title: "Noted – Note Saver Web Application",
+  //   description:
+  //     "A responsive note-taking app with CRUD functionality, Redux state management, theme support, and persistent storage.",
+  //   image: "/projects/noted-app.png",
+  //   tech: [
+  //     "React",
+  //     "Redux Toolkit",
+  //     "Tailwind CSS",
+  //     "React Router",
+  //     "LocalStorage",
+  //   ],
+  //   liveUrl: "https://notes-saver-fawn.vercel.app/",
+  //   codeUrl: "https://github.com/Jatinverma2612/Note-Saver-App.git",
+  // },
+  
 ];
 
 export default function Projects() {
   const [index, setIndex] = useState(0);
+  const [cardsPerView, setCardsPerView] = useState(3);
+
+  // 🔥 RESPONSIVE LOGIC
+  useEffect(() => {
+    const updateCardsPerView = () => {
+      if (window.innerWidth < 768) {
+        setCardsPerView(1); // mobile
+      } else if (window.innerWidth < 1024) {
+        setCardsPerView(2); // tablet
+      } else {
+        setCardsPerView(3); // desktop
+      }
+    };
+
+    updateCardsPerView();
+    window.addEventListener("resize", updateCardsPerView);
+    return () => window.removeEventListener("resize", updateCardsPerView);
+  }, []);
 
   const CARD_WIDTH = 360;
-  const MAX_INDEX = Math.max(projects.length - 3, 0);
+  const MAX_INDEX = Math.max(projects.length - cardsPerView, 0);
 
   return (
     <section id="projects" className="py-28 overflow-hidden scroll-mt-28">
       <div className="max-w-7xl mx-auto px-6 relative">
+
         {/* HEADING */}
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
           className="text-4xl md:text-5xl font-bold text-center"
         >
@@ -81,7 +101,8 @@ export default function Projects() {
 
         {/* SLIDER */}
         <div className="relative">
-          {/* LEFT ARROW */}
+
+          {/* LEFT */}
           <button
             onClick={() => setIndex((i) => Math.max(i - 1, 0))}
             disabled={index === 0}
@@ -155,7 +176,7 @@ export default function Projects() {
             </motion.div>
           </div>
 
-          {/* RIGHT ARROW */}
+          {/* RIGHT */}
           <button
             onClick={() => setIndex((i) => Math.min(i + 1, MAX_INDEX))}
             disabled={index === MAX_INDEX}
