@@ -1,29 +1,30 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 
 const timeline = [
   {
-    year: "2024 – Present",
-    title: "Frontend Development (Projects & Practice)",
+    year: "2025 – Present",
+    title: "Full Stack Web Development",
     points: [
-      "Building real-world projects using React and Next.js",
-      "Creating responsive UI with Tailwind CSS",
-      "Working with APIs, components, and state management",
-    ],
-  },
-  {
-    year: "2023 – 2024",
-    title: "JavaScript & Web Fundamentals",
-    points: [
-      "Strong foundation in JavaScript (ES6+)",
-      "DOM manipulation and browser concepts",
-      "Mini projects for logic and UI practice",
+      "Building scalable full-stack applications using MERN stack & Next.js",
+      "Developing secure RESTful APIs, authentication (JWT), and databases",
+      "Continuously learning and integrating modern interactive UI tools",
     ],
   },
   {
     year: "2024 – 2025",
+    title: "JavaScript & Frontend Engineering",
+    points: [
+      "Mastered core JavaScript (ES6+), DOM, and modern React",
+      "Engineered fully responsive UIs with Tailwind CSS and DaisyUI",
+      "Created foundational projects focusing on optimized state management",
+    ],
+  },
+  {
+    year: "2025 – 2026",
     title: "Programming Foundations",
     points: [
       "Learned C and C++ programming",
@@ -47,8 +48,11 @@ export default function Experience() {
             practice, and real-world problem solving.
           </p>
 
-          <div className="relative">
-            <div className="absolute left-1/2 top-0 h-full w-[2px] bg-white/10 -translate-x-1/2" />
+          <div className="relative mt-16 lg:mt-24">
+            {/* Center Line Glow - Hidden on mobile, Center on md+ */}
+            <div className="absolute left-[22px] md:left-1/2 top-0 h-full w-[4px] bg-orange-500/20 blur-sm md:-translate-x-1/2" />
+            {/* Center Line Solid - Left aligned on mobile, Center on md+ */}
+            <div className="absolute left-[22px] md:left-1/2 top-0 h-full w-[2px] bg-gradient-to-b from-orange-500 via-orange-500/20 to-transparent md:-translate-x-1/2" />
 
             {timeline.map((item, index) => {
               const isLeft = index % 2 === 0;
@@ -56,33 +60,44 @@ export default function Experience() {
               return (
                 <motion.div
                   key={item.title}
-                  initial={{
-                    opacity: 0,
-                    x: isLeft ? -80 : 80,
-                  }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.7, ease: "easeOut" }}
-                  className={`mb-20 flex ${
-                    isLeft ? "justify-start" : "justify-end"
+                  transition={{ duration: 0.7, ease: "easeOut", delay: index * 0.1 }}
+                  className={`mb-12 md:mb-20 flex w-full justify-end ${
+                    isLeft ? "md:justify-start" : "md:justify-end"
                   }`}
                 >
-                  <div className="relative w-full md:w-[45%] bg-white/5 border border-white/10 rounded-xl p-6 hover:border-orange-500/50 transition">
-                    <span
-                      className={`absolute top-6 w-4 h-4 rounded-full bg-orange-500 ${
-                        isLeft ? "-right-[34px]" : "-left-[34px]"
+                  {/* Card Container - full width offset on mobile, 50%-30px on desktop safely locked */}
+                  <div className="relative w-[calc(100%-60px)] md:w-[calc(50%-30px)] bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl md:rounded-3xl p-6 md:p-8 hover:border-orange-500/50 hover:shadow-[0_0_35px_rgba(255,138,0,0.15)] transition-all duration-500 group overflow-hidden cursor-pointer">
+                    
+                    {/* Hover Glow Background inside card */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-bl-full -z-10 group-hover:bg-orange-500/10 transition-colors duration-500" />
+
+                    {/* Timeline Dot Desktop */}
+                    <div
+                      className={`absolute top-8 w-6 h-6 rounded-full border-[5px] border-black bg-orange-500 shadow-[0_0_15px_rgba(255,138,0,0.8)] z-10 group-hover:scale-125 group-hover:shadow-[0_0_25px_rgba(255,138,0,1)] transition-all duration-300 hidden md:block ${
+                        isLeft ? "-right-[30px] translate-x-1/2" : "-left-[30px] -translate-x-1/2"
                       }`}
                     />
+                    
+                    {/* Mobile Dot */}
+                    <div className="absolute top-8 -left-[38px] -translate-x-1/2 w-5 h-5 rounded-full border-[4px] border-black bg-orange-500 md:hidden z-10 shadow-[0_0_10px_rgba(255,138,0,0.8)]" />
 
-                    <span className="text-sm text-orange-500">{item.year}</span>
+                    <div className="inline-block px-3 md:px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-[10px] md:text-xs font-bold text-orange-400 tracking-wider uppercase mb-3 md:mb-4 shadow-inner">
+                      {item.year}
+                    </div>
 
-                    <h3 className="text-xl font-semibold mt-2 mb-4">
+                    <h3 className="text-xl md:text-2xl font-bold mt-1 mb-4 md:mb-5 text-white group-hover:text-orange-400 transition-colors duration-300">
                       {item.title}
                     </h3>
 
-                    <ul className="space-y-2 text-zinc-400 text-sm">
+                    <ul className="space-y-3 md:space-y-4 text-zinc-400 text-xs md:text-sm leading-relaxed">
                       {item.points.map((point, i) => (
-                        <li key={i}>• {point}</li>
+                        <li key={i} className="flex gap-2 md:gap-3 items-start">
+                          <CheckCircle2 className="text-orange-500/60 mt-[2px] flex-shrink-0" size={14} />
+                          <span>{point}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>

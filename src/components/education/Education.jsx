@@ -1,6 +1,6 @@
 "use client";
 
-import { GraduationCap, BookOpen } from "lucide-react";
+import { GraduationCap, BookOpen, Laptop } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Education() {
@@ -32,25 +32,28 @@ export default function Education() {
           strong foundation in software development.
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
 
+          {/* CARD 1: IGNOU */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="glass-card p-8 hover:border-orange-500/60 transition"
+            className="relative glass-card p-8 hover:border-orange-500/60 hover:shadow-[0_0_35px_rgba(255,138,0,0.12)] transition-all duration-500 group overflow-hidden"
           >
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 rounded-full bg-orange-500/15 flex items-center justify-center text-orange-500">
-                <GraduationCap size={22} />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-bl-full -z-10 group-hover:bg-orange-500/10 transition-colors duration-500" />
+            
+            <div className="flex flex-col gap-4 mb-6">
+              <div className="w-14 h-14 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-500 group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-white transition-all duration-500 shadow-inner">
+                <GraduationCap size={26} />
               </div>
-              <h3 className="text-2xl font-semibold">
+              <h3 className="text-xl font-semibold leading-snug">
                 Bachelor of Computer Applications (BCA)
               </h3>
             </div>
 
-            <p className="text-orange-400 text-sm mb-4">
+            <p className="text-orange-400 font-medium text-sm mb-4">
               Indira Gandhi National Open University (IGNOU)
             </p>
 
@@ -60,36 +63,78 @@ export default function Education() {
               Alongside academics, I actively build projects and practice DSA.
             </p>
 
-            <p className="text-zinc-500 text-xs mt-4">
-              College: Sri Guru Tegh Bahadur Khalsa College, Delhi
-            </p>
+            <div className="mt-8 pt-4 border-t border-white/5">
+              <p className="text-zinc-500 text-xs">
+                College: Sri Guru Tegh Bahadur Khalsa College, Delhi
+              </p>
+            </div>
           </motion.div>
 
+          {/* CARD 2: Full Stack Knowledge */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="glass-card p-8 hover:border-orange-500/60 transition"
+            className="relative glass-card p-8 hover:border-orange-500/60 hover:shadow-[0_0_35px_rgba(255,138,0,0.12)] transition-all duration-500 group overflow-hidden"
           >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 rounded-full bg-orange-500/15 flex items-center justify-center text-orange-500">
-                <BookOpen size={22} />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-bl-full -z-10 group-hover:bg-orange-500/10 transition-colors duration-500" />
+            
+            <div className="flex flex-col gap-4 mb-6">
+              <div className="w-14 h-14 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-500 group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-white transition-all duration-500 shadow-inner">
+                <Laptop size={24} />
               </div>
-              <h3 className="text-2xl font-semibold">
-                Courses & Self Learning
+              <h3 className="text-xl font-semibold leading-snug">
+                Full Stack Web Development
               </h3>
             </div>
 
-            <ul className="space-y-4 text-sm text-zinc-400">
-              <li>
-                • <span className="text-white font-medium">C++ with DSA</span> — Love Babbar (CodeHelp)
+            <p className="text-orange-400 font-medium text-sm mb-4">
+              Self-Taught & Project-Based Learning
+            </p>
+
+            <p className="text-zinc-400 text-sm leading-relaxed">
+              Mastered the MERN stack (MongoDB, Express, React, Node.js) and Next.js through rigorous hands-on projects. Specialized in RESTful APIs, modern UI libraries like Tailwind, and scalable system architecture.
+            </p>
+
+            <div className="mt-8 pt-4 border-t border-white/5">
+              <p className="text-zinc-500 text-xs">
+                Real-world projects and robust backend engineering
+              </p>
+            </div>
+          </motion.div>
+
+          {/* CARD 3: Courses */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="relative glass-card p-8 hover:border-orange-500/60 hover:shadow-[0_0_35px_rgba(255,138,0,0.12)] transition-all duration-500 group overflow-hidden md:col-span-2 lg:col-span-1"
+          >
+            <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-bl-full -z-10 group-hover:bg-orange-500/10 transition-colors duration-500" />
+
+            <div className="flex flex-col gap-4 mb-6">
+              <div className="w-14 h-14 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-500 group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-white transition-all duration-500 shadow-inner">
+                <BookOpen size={24} />
+              </div>
+              <h3 className="text-xl font-semibold leading-snug">
+                Courses & Certifications
+              </h3>
+            </div>
+
+            <ul className="space-y-5 text-sm text-zinc-400 mt-4">
+              <li className="flex gap-3">
+                <span className="text-orange-500 relative top-[2px]">▹</span>
+                <span><strong className="text-white font-medium">C++ with DSA</strong> — Love Babbar (CodeHelp)</span>
               </li>
-              <li>
-                • <span className="text-white font-medium">Basic Computer Fundamentals</span> — OS, MS Office, Internet
+              <li className="flex gap-3">
+                <span className="text-orange-500 relative top-[2px]">▹</span>
+                <span><strong className="text-white font-medium">Computer Fundamentals</strong> — OS, Networking basics</span>
               </li>
-              <li>
-                • <span className="text-white font-medium">Problem Solving Practice</span> — Regular LeetCode & DSA practice (100+ Qns Solved)
+              <li className="flex gap-3">
+                <span className="text-orange-500 relative top-[2px]">▹</span>
+                <span><strong className="text-white font-medium">Problem Solving</strong> — Daily LeetCode (100+ Qns Solved)</span>
               </li>
             </ul>
           </motion.div>

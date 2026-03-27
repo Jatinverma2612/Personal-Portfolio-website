@@ -21,23 +21,20 @@ export default function About() {
           <p className="text-zinc-400 leading-relaxed mb-6">
             I am a{" "}
             <span className="text-white font-medium">
-              passionate Frontend Developer
+              passionate Full Stack Developer
             </span>{" "}
             with a strong focus on creating{" "}
             <span className="text-orange-500">
-              clean, responsive, and visually engaging user interfaces
+              clean, responsive, and highly scalable applications
             </span>
-            . I enjoy transforming ideas into real-world applications using
-            modern frontend technologies like{" "}
-            <span className="text-white font-medium">React</span> and Tailwind
-            CSS.
+            . I enjoy transforming ideas into real-world software by combining 
+            interactive frontend interfaces with powerful backend architectures using{" "}
+            <span className="text-white font-medium">React, Node.js, Express, and MongoDB</span>.
           </p>
 
           <p className="text-zinc-400 leading-relaxed mb-6">
-            Alongside frontend development, I am actively working towards
-            becoming a{" "}
-            <span className="text-white font-medium">Full Stack Developer</span>
-            . I regularly practice{" "}
+            I love pushing my boundaries by exploring new paradigms, from modern design 
+            with Next.js and DaisyUI to secure RESTful APIs via JWT and Postman. I also regularly practice{" "}
             <span className="text-orange-500">
               Data Structures & Algorithms
             </span>{" "}
@@ -60,7 +57,7 @@ export default function About() {
           </p>
 
           <a
-            href="/jatinverma_resume.pdf"
+            href="/projects/Jatinverma.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="
