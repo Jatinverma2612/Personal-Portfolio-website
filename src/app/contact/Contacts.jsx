@@ -7,6 +7,7 @@ import {
   MapPin,
   Linkedin,
   Github,
+  Instagram,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -123,6 +124,10 @@ export default function Contact() {
                 <SocialIcon
                   href="https://github.com/Jatinverma2612"
                   icon={<Github />}
+                />
+                <SocialIcon
+                  href="https://www.instagram.com/jatin.vermaa/?hl=en"
+                  icon={<Instagram />}
                 />
                 <SocialIcon
                   href="mailto:jatinverma4554@gmail.com"
