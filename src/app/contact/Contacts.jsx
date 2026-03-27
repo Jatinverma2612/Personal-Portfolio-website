@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   Mail,
   Phone,
@@ -10,6 +11,48 @@ import {
 import { motion } from "framer-motion";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+  const [status, setStatus] = useState("idle"); // idle, loading, success, error
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      setStatus("error");
+      setErrorMessage("Please fill in all fields.");
+      return;
+    }
+
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setStatus("error");
+        setErrorMessage(result.error || "Failed to send message.");
+      }
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage("An unexpected error occurred. Please try again later.");
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -97,36 +140,46 @@ export default function Contact() {
             viewport={{ once: true }}
             className="glass-card p-8"
           >
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input placeholder="Your Name" />
-                <Input placeholder="Your Email" />
+                <Input name="name" value={formData.name} onChange={handleChange} placeholder="Your Name" required />
+                <Input name="email" value={formData.email} onChange={handleChange} type="email" placeholder="Your Email" required />
               </div>
 
-              <Input placeholder="Subject" />
+              <Input name="subject" value={formData.subject} onChange={handleChange} placeholder="Subject" required />
 
               <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 rows="5"
                 placeholder="Tell me about your project..."
                 className="contact-input resize-none"
+                required
               />
 
-              <button
-                type="button"
-                className="
-                  w-full py-3 rounded-full
-                  bg-orange-500 text-white font-medium
-                  transition
-                  hover:bg-orange-400
-                  hover:shadow-[0_0_35px_rgba(255,138,0,0.6)]
-                "
-              >
-                Send Message
-              </button>
+              {status === "success" && (
+                <p className="text-sm font-medium text-green-500 bg-green-500/10 py-2.5 px-3 rounded-xl border border-green-500/20 text-center">
+                  Message sent successfully! I'll get back to you soon.
+                </p>
+              )}
+              
+              {status === "error" && (
+                <p className="text-sm font-medium text-red-500 bg-red-500/10 py-2.5 px-3 rounded-xl border border-red-500/20 text-center">
+                  {errorMessage}
+                </p>
+              )}
 
-              <p className="text-xs text-zinc-500 text-center mt-4">
-                * Frontend demo only — backend not connected
-              </p>
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className={`
+                  w-full py-3 rounded-full text-white font-medium transition
+                  ${status === "loading" ? "bg-orange-500/50 cursor-not-allowed" : "bg-orange-500 hover:bg-orange-400 hover:shadow-[0_0_35px_rgba(255,138,0,0.6)]"}
+                `}
+              >
+                {status === "loading" ? "Sending..." : "Send Message"}
+              </button>
             </form>
           </motion.div>
         </div>
@@ -183,11 +236,12 @@ function SocialIcon({ href, icon }) {
   );
 }
 
-function Input({ placeholder }) {
+function Input({ placeholder, ...props }) {
   return (
     <input
       placeholder={placeholder}
       className="contact-input"
+      {...props}
     />
   );
 }
